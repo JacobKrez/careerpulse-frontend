@@ -1,0 +1,91 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #f5f6f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+.App-header h1 {
+  font-size: 2.5rem;
+  color: #0077b5;
+  margin-bottom: 1rem;
+}
+
+.App-header p.tagline {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.App-header input {
+  padding: 0.75rem;
+  width: 16rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+}
+
+.App-header button {
+  background-color: #0077b5;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.App-header button:hover {
+  background-color: #005f91;
+}
+
+.App-header ul {
+  margin-top: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.App-header ul li {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.App-header .action-btn {
+  background-color: transparent;
+  color: #0077b5;
+  padding: 0.25rem 0.5rem;
+  margin-left: 1rem;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.App-header .action-btn:hover {
+  color: #005f91;
+}
+
+.App-header .output {
+  margin-top: 1.5rem;
+  max-width: 40rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: pre-wrap;
+}
+
+.App-header .error {
+  color: #d32f2f;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
