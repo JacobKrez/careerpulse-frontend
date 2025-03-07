@@ -11,7 +11,7 @@ function App() {
   const handleScrape = async () => {
     try {
       setError('');
-      const response = await fetch(`https://careerpulse-backend.onrender.com/scrape?skills=${skills}`); // Updated URL
+      const response = await fetch(`https://careerpulse-backend.onrender.com/scrape?skills=${skills}`);
       if (!response.ok) throw new Error('Scraping failed');
       const data = await response.json();
       setJobs(data);
@@ -26,7 +26,7 @@ function App() {
   const getEmail = async (job) => {
     try {
       setError('');
-      const response = await fetch(`https://careerpulse-backend.onrender.com/scrape?skills=${skills}`);
+      const response = await fetch(`https://careerpulse-backend.onrender.com/email?job=${job}&skills=${skills}`);
       if (!response.ok) throw new Error('Email generation failed');
       const text = await response.text();
       setEmail(text);
@@ -40,7 +40,7 @@ function App() {
   const getQuestions = async (job) => {
     try {
       setError('');
-      const response = await fetch(`https://careerpulse-backend.onrender.com/scrape?skills=${skills}`);
+      const response = await fetch(`https://careerpulse-backend.onrender.com/interview?job=${job}&skills=${skills}`);
       if (!response.ok) throw new Error('Questions generation failed');
       const text = await response.text();
       setQuestions(text);
@@ -54,7 +54,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>CareerPulse</h1>
+        <h1>CareerPulseAI</h1> {/* Updated to CareerPulseAI */}
         <p className="tagline">Unlock your next opportunity with AI-powered insights</p>
         <input
           type="text"
