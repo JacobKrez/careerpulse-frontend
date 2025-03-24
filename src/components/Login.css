@@ -1,0 +1,31 @@
+/* src/components/Login.css */
+.login-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-paper {
+    padding: 2rem;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-paper h4 {
+    color: #1E3A8A;
+    font-weight: 700;
+  }
+  
+  .login-paper h6 {
+    color: #1F2937;
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .login-paper {
+      padding: 1.5rem;
+    }
+  }

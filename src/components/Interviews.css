@@ -1,0 +1,89 @@
+/* src/components/Interviews.css */
+.interviews-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #F9FAFB;
+  }
+  
+  .input-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    justify-items: center;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+  
+  .spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #FFFFFF;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .output-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+  
+  .output-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .output-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .output-card h6 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1E3A8A;
+    margin-bottom: 1rem;
+  }
+  
+  .copy-button {
+    background-color: #10B981;
+  }
+  
+  .copy-button:hover {
+    background-color: #059669;
+  }
+  
+  @media (max-width: 768px) {
+    .interviews-container {
+      padding: 1rem;
+    }
+  
+    .input-section {
+      grid-template-columns: 1fr;
+    }
+  
+    .button-group {
+      flex-direction: column;
+    }
+  
+    .button-group .MuiButton-root {
+      width: 100%;
+    }
+  }

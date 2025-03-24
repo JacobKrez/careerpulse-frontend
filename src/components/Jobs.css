@@ -1,0 +1,60 @@
+/* src/components/Jobs.css */
+.jobs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #F9FAFB;
+  }
+  
+  .input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .input-section .MuiTextField-root {
+    max-width: 400px;
+  }
+  
+  .spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #FFFFFF;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .jobs-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .job-item {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .job-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  @media (max-width: 768px) {
+    .jobs-container {
+      padding: 1rem;
+    }
+  }
