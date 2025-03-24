@@ -1,5 +1,7 @@
+// src/components/Dashboard.js
 import React from 'react';
-import { Outlet, Box } from '@mui/material';
+import { Outlet } from 'react-router-dom'; // Correct import for Outlet
+import { Box } from '@mui/material'; // Box remains from @mui/material
 
 function Dashboard() {
   return (
