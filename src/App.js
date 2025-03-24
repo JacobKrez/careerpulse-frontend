@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+import LandingPage from './components/LandingPage'; // Import the new component
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Jobs from './components/Jobs';
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <div className="app-container">
-      {currentUser && (
+      {currentUser && location.pathname !== '/' && (
         <AppBar position="sticky" className="app-bar">
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -52,6 +53,7 @@ function App() {
       )}
       <main>
         <Routes>
+          <Route path="/" element={<LandingPage />} /> {/* Render LandingPage at root */}
           <Route path="/login" element={currentUser ? <Navigate to="/dashboard" /> : <Login />} />
           <Route path="/dashboard" element={currentUser ? <Dashboard /> : <Navigate to="/login" />}>
             <Route path="jobs" element={<Jobs />} />
@@ -60,10 +62,9 @@ function App() {
             <Route path="networking" element={<Networking />} />
             <Route path="" element={<Navigate to="jobs" />} />
           </Route>
-          <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
       </main>
-      {currentUser && (
+      {currentUser && location.pathname !== '/' && (
         <footer className="footer">
           <Typography variant="body2" align="center">
             © 2025 CareerPulseAI. All rights reserved. |{' '}
@@ -77,7 +78,6 @@ function App() {
   );
 }
 
-// Wrap App with Router to use useLocation and useNavigate
 const AppWithRouter = () => (
   <Router>
     <App />

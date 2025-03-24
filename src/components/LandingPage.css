@@ -1,0 +1,118 @@
+/* src/components/LandingPage.css */
+.landing-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #F9FAFB;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    color: #FFFFFF;
+    text-align: center;
+    padding: 4rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-button {
+    padding: 0.75rem 2rem;
+    font-size: 1.2rem;
+  }
+  
+  /* Features Section */
+  .features-section {
+    padding: 4rem 2rem;
+    background-color: #F9FAFB;
+  }
+  
+  .features-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1E3A8A;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .feature-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .feature-icon {
+    font-size: 3rem;
+    color: #3B82F6;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1E3A8A;
+    margin-bottom: 1rem;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #1E3A8A;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .footer a {
+    color: #3B82F6;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .footer a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 2rem 1rem;
+    }
+  
+    .hero-title {
+      font-size: 2rem;
+    }
+  
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
+  
+    .features-section {
+      padding: 2rem 1rem;
+    }
+  
+    .features-title {
+      font-size: 2rem;
+    }
+  }
