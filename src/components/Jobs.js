@@ -1,5 +1,6 @@
+// src/components/Jobs.js
 import React, { useState } from 'react';
-import { Typography, Box, TextField, Button, List, ListItem, ListItemText } from '@mui/material';
+import { Typography, Box, TextField, Button, List, ListItem, ListItemText, CircularProgress, Alert } from '@mui/material';
 import './Jobs.css';
 
 function Jobs() {
@@ -7,6 +8,8 @@ function Jobs() {
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://careerpulse-backend.onrender.com';
 
   const fetchJobs = async () => {
     if (!jobRole) {
@@ -17,7 +20,7 @@ function Jobs() {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch(`https://careerpulse-backend.onrender.com/scrape?skills=${encodeURIComponent(jobRole)}`);
+      const response = await fetch(`${API_BASE_URL}/scrape?skills=${encodeURIComponent(jobRole)}`, { timeout: 10000 });
       if (!response.ok) throw new Error('Failed to fetch jobs');
       const data = await response.json();
       setJobs(data);
@@ -44,11 +47,20 @@ function Jobs() {
           variant="outlined"
         />
         <Button variant="contained" onClick={fetchJobs} disabled={loading}>
-          {loading ? <span className="spinner"></span> : 'Search Jobs'}
+          Search Jobs
         </Button>
       </Box>
-      {error && <Typography color="error">{error}</Typography>}
-      {loading && <Typography>Loading jobs...</Typography>}
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+      {loading && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
+          <CircularProgress />
+          <Typography sx={{ ml: 2 }}>Loading jobs...</Typography>
+        </Box>
+      )}
       {jobs.length > 0 && (
         <List className="jobs-list">
           {jobs.map((job, index) => (

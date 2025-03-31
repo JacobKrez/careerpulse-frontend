@@ -1,6 +1,7 @@
+// src/components/Login.js
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Container, TextField, Button, Typography, Box, Paper } from '@mui/material';
 import './Login.css';
 
@@ -10,11 +11,16 @@ function Login() {
   const [error, setError] = useState('');
   const { login, signup } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the redirect path from the query parameter
+  const query = new URLSearchParams(location.search);
+  const redirectPath = query.get('redirect') || '/dashboard';
 
   const handleLogin = async () => {
     try {
       await login(email, password);
-      navigate('/dashboard');
+      navigate(redirectPath);
     } catch (err) {
       setError('Failed to log in. Please check your credentials.');
     }
@@ -23,7 +29,7 @@ function Login() {
   const handleSignup = async () => {
     try {
       await signup(email, password);
-      navigate('/dashboard');
+      navigate(redirectPath);
     } catch (err) {
       setError('Failed to create account. Please try again.');
     }

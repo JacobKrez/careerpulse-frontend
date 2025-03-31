@@ -10,12 +10,19 @@ import './LandingPage.css';
 function LandingPage() {
   const navigate = useNavigate();
 
+  const handleCardClick = (path) => {
+    navigate(path);
+  };
+
   return (
     <Box className="landing-container">
       {/* Hero Section */}
       <Box className="hero-section">
-        <Typography variant="h2" className="hero-title">
-          Supercharge Your Career with AI-Powered Tools
+        <Typography variant="h1" className="hero-title">
+          CareerPulseAI
+        </Typography>
+        <Typography variant="h4" className="hero-slogan">
+          Supercharge Your Career
         </Typography>
         <Typography variant="h5" className="hero-subtitle">
           Find jobs, prepare for interviews, and grow your career—all in one place.
@@ -32,7 +39,11 @@ function LandingPage() {
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={4}>
-            <Card className="feature-card">
+            <Card
+              className="feature-card"
+              onClick={() => handleCardClick('/login?redirect=/dashboard/jobs')}
+              sx={{ cursor: 'pointer' }}
+            >
               <CardContent>
                 <WorkIcon className="feature-icon" />
                 <Typography variant="h6" className="feature-title">
@@ -45,7 +56,11 @@ function LandingPage() {
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Card className="feature-card">
+            <Card
+              className="feature-card"
+              onClick={() => handleCardClick('/login?redirect=/dashboard/interviews')}
+              sx={{ cursor: 'pointer' }}
+            >
               <CardContent>
                 <SchoolIcon className="feature-icon" />
                 <Typography variant="h6" className="feature-title">
@@ -58,7 +73,11 @@ function LandingPage() {
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Card className="feature-card">
+            <Card
+              className="feature-card"
+              onClick={() => handleCardClick('/login?redirect=/dashboard/networking')}
+              sx={{ cursor: 'pointer' }}
+            >
               <CardContent>
                 <PeopleIcon className="feature-icon" />
                 <Typography variant="h6" className="feature-title">

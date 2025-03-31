@@ -1,5 +1,6 @@
+// src/components/Interviews.js
 import React, { useState } from 'react';
-import { Typography, Box, TextField, Button, List, ListItem, ListItemText, Divider } from '@mui/material';
+import { Typography, Box, TextField, Button, List, ListItem, ListItemText, Divider, CircularProgress, Alert, Share, ThumbUp, ThumbDown } from '@mui/material';
 import './Interviews.css';
 
 function Interviews() {
@@ -14,21 +15,23 @@ function Interviews() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://careerpulse-backend.onrender.com';
+
   const handleGenerate = async () => {
     setLoading(true);
     setError('');
     try {
-      // Generate email
       const emailResponse = await fetch(
-        `https://careerpulse-backend.onrender.com/email?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}&company=${encodeURIComponent(company)}&experience=${encodeURIComponent(experience)}`
+        `${API_BASE_URL}/email?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}&company=${encodeURIComponent(company)}&experience=${encodeURIComponent(experience)}`,
+        { timeout: 10000 }
       );
       if (!emailResponse.ok) throw new Error('Email generation failed');
       const emailContent = await emailResponse.text();
       setEmail(emailContent);
 
-      // Generate interview questions
       const interviewResponse = await fetch(
-        `https://careerpulse-backend.onrender.com/interview?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}`
+        `${API_BASE_URL}/interview?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}`,
+        { timeout: 10000 }
       );
       if (!interviewResponse.ok) throw new Error('Questions generation failed');
       const interviewContent = await interviewResponse.text();
@@ -45,7 +48,7 @@ function Interviews() {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch('https://careerpulse-backend.onrender.com/mock-interview', {
+      const response = await fetch(`${API_BASE_URL}/mock-interview`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ job: jobRole, skills }),
@@ -117,23 +120,61 @@ function Interviews() {
         />
         <Box className="button-group">
           <Button variant="contained" onClick={handleGenerate} disabled={loading || !jobRole || !skills}>
-            {loading ? <span className="spinner"></span> : 'Generate Preparation Materials'}
+            Generate Preparation Materials
           </Button>
           <Button variant="contained" onClick={handleMockInterview} disabled={loading || !jobRole || !skills}>
-            {loading ? <span className="spinner"></span> : 'Start Mock Interview'}
+            Start Mock Interview
           </Button>
         </Box>
       </Box>
-      {error && <Typography color="error">{error}</Typography>}
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+      {loading && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
+          <CircularProgress />
+          <Typography sx={{ ml: 2 }}>Generating materials...</Typography>
+        </Box>
+      )}
       {(email || questions || mockInterview) && (
         <Box className="output-section">
           {email && (
             <Box className="output-card">
               <Typography variant="h6">Outreach Email</Typography>
               <Typography sx={{ whiteSpace: 'pre-wrap', mb: 2 }}>{email}</Typography>
-              <Button variant="contained" className="copy-button" onClick={copyToClipboard}>
+              <Button variant="contained" className="copy-button" onClick={copyToClipboard} sx={{ mr: 2 }}>
                 Copy to Clipboard
               </Button>
+              <Button
+                variant="outlined"
+                startIcon={<Share />}
+                onClick={() => {
+                  navigator.share({
+                    title: 'My Outreach Email from CareerPulseAI',
+                    text: email,
+                    url: window.location.href,
+                  }).catch(() => alert('Sharing is not supported on this device.'));
+                }}
+              >
+                Share Email
+              </Button>
+              <Box sx={{ mt: 2, display: 'flex', gap: 1, alignItems: 'center' }}>
+                <Typography>Was this email helpful?</Typography>
+                <Button
+                  startIcon={<ThumbUp />}
+                  onClick={() => alert('Thanks for your feedback!')}
+                >
+                  Yes
+                </Button>
+                <Button
+                  startIcon={<ThumbDown />}
+                  onClick={() => alert('Sorry to hear that. We’ll improve!')}
+                >
+                  No
+                </Button>
+              </Box>
             </Box>
           )}
           {questions && (
@@ -146,12 +187,70 @@ function Interviews() {
                   </ListItem>
                 ))}
               </List>
+              <Button
+                variant="outlined"
+                startIcon={<Share />}
+                sx={{ mt: 2 }}
+                onClick={() => {
+                  navigator.share({
+                    title: 'My Interview Questions from CareerPulseAI',
+                    text: questions,
+                    url: window.location.href,
+                  }).catch(() => alert('Sharing is not supported on this device.'));
+                }}
+              >
+                Share Questions
+              </Button>
+              <Box sx={{ mt: 2, display: 'flex', gap: 1, alignItems: 'center' }}>
+                <Typography>Were these questions helpful?</Typography>
+                <Button
+                  startIcon={<ThumbUp />}
+                  onClick={() => alert('Thanks for your feedback!')}
+                >
+                  Yes
+                </Button>
+                <Button
+                  startIcon={<ThumbDown />}
+                  onClick={() => alert('Sorry to hear that. We’ll improve!')}
+                >
+                  No
+                </Button>
+              </Box>
             </Box>
           )}
           {mockInterview && (
             <Box className="output-card">
               <Typography variant="h6">Mock Interview</Typography>
               <Typography sx={{ whiteSpace: 'pre-wrap', mb: 2 }}>{mockInterview}</Typography>
+              <Button
+                variant="outlined"
+                startIcon={<Share />}
+                sx={{ mt: 2 }}
+                onClick={() => {
+                  navigator.share({
+                    title: 'My Mock Interview from CareerPulseAI',
+                    text: mockInterview,
+                    url: window.location.href,
+                  }).catch(() => alert('Sharing is not supported on this device.'));
+                }}
+              >
+                Share Mock Interview
+              </Button>
+              <Box sx={{ mt: 2, display: 'flex', gap: 1, alignItems: 'center' }}>
+                <Typography>Was this mock interview helpful?</Typography>
+                <Button
+                  startIcon={<ThumbUp />}
+                  onClick={() => alert('Thanks for your feedback!')}
+                >
+                  Yes
+                </Button>
+                <Button
+                  startIcon={<ThumbDown />}
+                  onClick={() => alert('Sorry to hear that. We’ll improve!')}
+                >
+                  No
+                </Button>
+              </Box>
             </Box>
           )}
         </Box>

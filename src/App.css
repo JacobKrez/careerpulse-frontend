@@ -88,32 +88,6 @@ h5 {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.MuiButton-root {
-  margin: 10px;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
-  color: #FFFFFF;
-  border-radius: 4px;
-  font-weight: 500;
-  text-transform: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.MuiButton-root:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
-}
-
-.MuiButton-root:disabled {
-  background: #D1D5DB;
-}
-
-.error {
-  color: #EF4444;
-  margin: 10px 0;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   main {
