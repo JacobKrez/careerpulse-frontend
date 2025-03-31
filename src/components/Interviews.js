@@ -1,6 +1,7 @@
 // src/components/Interviews.js
 import React, { useState } from 'react';
-import { Typography, Box, TextField, Button, List, ListItem, ListItemText, Divider, CircularProgress, Alert, Share, ThumbUp, ThumbDown } from '@mui/material';
+import { Typography, Box, TextField, Button, List, ListItem, ListItemText, Divider, CircularProgress, Alert } from '@mui/material';
+import { Share, ThumbUp, ThumbDown } from '@mui/icons-material'; // Corrected imports
 import './Interviews.css';
 
 function Interviews() {

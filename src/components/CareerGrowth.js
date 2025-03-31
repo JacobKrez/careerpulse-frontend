@@ -1,6 +1,7 @@
 // src/components/CareerGrowth.js
 import React, { useState } from 'react';
-import { Typography, Box, TextField, Button, CircularProgress, Alert, Share, ThumbUp, ThumbDown } from '@mui/material';
+import { Typography, Box, TextField, Button, CircularProgress, Alert } from '@mui/material';
+import { Share, ThumbUp, ThumbDown } from '@mui/icons-material'; // Corrected imports
 import './CareerGrowth.css';
 
 function CareerGrowth() {
