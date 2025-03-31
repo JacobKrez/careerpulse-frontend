@@ -1,7 +1,7 @@
 // src/components/Networking.js
 import React, { useState } from 'react';
 import { Typography, Box, TextField, Button, CircularProgress, Alert } from '@mui/material';
-import { Share, ThumbUp, ThumbDown } from '@mui/icons-material'; // Corrected imports
+import { Share, ThumbUp, ThumbDown } from '@mui/icons-material';
 import './Networking.css';
 
 function Networking() {
@@ -25,8 +25,8 @@ function Networking() {
     setError('');
     try {
       const response = await fetch(
-        `${API_BASE_URL}/email?job=${encodeURIComponent(job)}&skills=${encodeURIComponent(skills)}&company=${encodeURIComponent(company)}&experience=${encodeURIComponent(experience)}`,
-        { timeout: 10000 }
+        `${API_BASE_URL}/openai/email?job=${encodeURIComponent(job)}&skills=${encodeURIComponent(skills)}&company=${encodeURIComponent(company)}&experience=${encodeURIComponent(experience)}`,
+        { timeout: 30000 }
       );
       if (!response.ok) throw new Error('Failed to generate email');
       const data = await response.text();

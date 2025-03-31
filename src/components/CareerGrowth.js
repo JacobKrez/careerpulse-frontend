@@ -1,7 +1,7 @@
 // src/components/CareerGrowth.js
 import React, { useState } from 'react';
 import { Typography, Box, TextField, Button, CircularProgress, Alert } from '@mui/material';
-import { Share, ThumbUp, ThumbDown } from '@mui/icons-material'; // Corrected imports
+import { Share, ThumbUp, ThumbDown } from '@mui/icons-material';
 import './CareerGrowth.css';
 
 function CareerGrowth() {
@@ -23,8 +23,8 @@ function CareerGrowth() {
     setError('');
     try {
       const response = await fetch(
-        `${API_BASE_URL}/career-coach?job=${encodeURIComponent(job)}&experience=${encodeURIComponent(experience)}`,
-        { timeout: 10000 }
+        `${API_BASE_URL}/openai/career-coach?job=${encodeURIComponent(job)}&experience=${encodeURIComponent(experience)}`,
+        { timeout: 30000 }
       );
       if (!response.ok) {
         throw new Error(`Failed to fetch career plan: ${response.statusText}`);

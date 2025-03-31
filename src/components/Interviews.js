@@ -1,7 +1,7 @@
 // src/components/Interviews.js
 import React, { useState } from 'react';
 import { Typography, Box, TextField, Button, List, ListItem, ListItemText, Divider, CircularProgress, Alert } from '@mui/material';
-import { Share, ThumbUp, ThumbDown } from '@mui/icons-material'; // Corrected imports
+import { Share, ThumbUp, ThumbDown } from '@mui/icons-material';
 import './Interviews.css';
 
 function Interviews() {
@@ -23,16 +23,16 @@ function Interviews() {
     setError('');
     try {
       const emailResponse = await fetch(
-        `${API_BASE_URL}/email?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}&company=${encodeURIComponent(company)}&experience=${encodeURIComponent(experience)}`,
-        { timeout: 10000 }
+        `${API_BASE_URL}/openai/email?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}&company=${encodeURIComponent(company)}&experience=${encodeURIComponent(experience)}`,
+        { timeout: 30000 }
       );
       if (!emailResponse.ok) throw new Error('Email generation failed');
       const emailContent = await emailResponse.text();
       setEmail(emailContent);
 
       const interviewResponse = await fetch(
-        `${API_BASE_URL}/interview?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}`,
-        { timeout: 10000 }
+        `${API_BASE_URL}/openai/interview?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}`,
+        { timeout: 30000 }
       );
       if (!interviewResponse.ok) throw new Error('Questions generation failed');
       const interviewContent = await interviewResponse.text();
@@ -49,11 +49,11 @@ function Interviews() {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch(`${API_BASE_URL}/mock-interview`, {
+      const response = await fetch(`${API_BASE_URL}/openai/mock-interview`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ job: jobRole, skills }),
-      });
+      }, { timeout: 30000 });
       if (!response.ok) throw new Error('Mock interview failed');
       const mockContent = await response.text();
       setMockInterview(mockContent);
