@@ -22,24 +22,36 @@ function Interviews() {
     setLoading(true);
     setError('');
     try {
+      // Fetch email
+      console.log('Fetching email...');
       const emailResponse = await fetch(
         `${API_BASE_URL}/openai/email?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}&company=${encodeURIComponent(company)}&experience=${encodeURIComponent(experience)}`,
         { timeout: 30000 }
       );
-      if (!emailResponse.ok) throw new Error('Email generation failed');
+      if (!emailResponse.ok) {
+        const errorText = await emailResponse.text();
+        throw new Error(`Email generation failed: ${emailResponse.status} - ${errorText}`);
+      }
       const emailContent = await emailResponse.text();
+      console.log('Email fetched successfully:', emailContent);
       setEmail(emailContent);
 
+      // Fetch interview questions
+      console.log('Fetching interview questions...');
       const interviewResponse = await fetch(
         `${API_BASE_URL}/openai/interview?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}`,
         { timeout: 30000 }
       );
-      if (!interviewResponse.ok) throw new Error('Questions generation failed');
+      if (!interviewResponse.ok) {
+        const errorText = await interviewResponse.text();
+        throw new Error(`Questions generation failed: ${interviewResponse.status} - ${errorText}`);
+      }
       const interviewContent = await interviewResponse.text();
+      console.log('Interview questions fetched successfully:', interviewContent);
       setQuestions(interviewContent);
     } catch (error) {
       console.error('Error generating content:', error);
-      setError('Failed to generate preparation materials—try again!');
+      setError(`Failed to generate preparation materials—try again! (${error.message})`);
     } finally {
       setLoading(false);
     }
