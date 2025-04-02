@@ -22,10 +22,19 @@ function Interviews() {
     setLoading(true);
     setError('');
     try {
-      // Fetch email
+      // Build the query string for /openai/email, only including experience if it's a valid number
+      const emailQueryParams = new URLSearchParams({
+        job: jobRole,
+        skills: skills,
+        company: company,
+      });
+      if (experience && !isNaN(experience) && experience.trim() !== '') {
+        emailQueryParams.append('experience', experience);
+      }
+
       console.log('Fetching email...');
       const emailResponse = await fetch(
-        `${API_BASE_URL}/openai/email?job=${encodeURIComponent(jobRole)}&skills=${encodeURIComponent(skills)}&company=${encodeURIComponent(company)}&experience=${encodeURIComponent(experience)}`,
+        `${API_BASE_URL}/openai/email?${emailQueryParams.toString()}`,
         { timeout: 30000 }
       );
       if (!emailResponse.ok) {
@@ -35,6 +44,9 @@ function Interviews() {
       const emailContent = await emailResponse.text();
       console.log('Email fetched successfully:', emailContent);
       setEmail(emailContent);
+
+      // Add a 1-second delay to avoid rate limiting
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Fetch interview questions
       console.log('Fetching interview questions...');
